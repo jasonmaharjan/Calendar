@@ -1,0 +1,260 @@
+@import "../../style.scss";
+
+.calendar {
+  margin: 5rem 5rem;
+  background-color: $white;
+  display: grid;
+  grid-template-rows: 7rem 4rem 1fr;
+  grid-template-columns: repeat(7, minmax(10rem, 1fr));
+  position: relative;
+  overflow-x: scroll;
+
+  @media only screen and (max-width: $largest) {
+    margin: 2.5rem 2.5rem;
+  }
+
+  @media only screen and (max-width: $large) {
+    margin: 2.5rem 2.5rem;
+    grid-template-rows: 5rem 3rem 1fr;
+    grid-template-columns: repeat(7, minmax(8rem, 1fr));
+  }
+
+  @media only screen and (max-width: $small) {
+    margin: 1.5rem 1.5rem;
+    grid-template-rows: 4rem 2rem 1fr;
+  }
+
+  @media only screen and (max-width: $mobile) {
+    margin: 1rem 1rem;
+    grid-template-rows: 3rem 2rem 1fr;
+  }
+}
+
+.event-form {
+  &-content {
+    background-color: $color-grey-dark;
+    width: 25rem;
+    height: 10rem;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.month-container {
+  color: $color-grey-dark;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  grid-row: 1 / 2;
+  grid-column: 1 / -1;
+  font-size: 1.5rem;
+  border: 1px solid $color-grey-light;
+
+  @media only screen and (max-width: $large) {
+    font-size: 1.25rem;
+  }
+
+  &-content {
+    &-month {
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+
+  &-arrow {
+    height: 1.25rem;
+    width: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @media only screen and (max-width: $large) {
+      height: 1.15rem;
+      width: 1.5rem;
+    }
+
+    @media only screen and (max-width: $small) {
+      height: 0.95rem;
+      width: 1.15rem;
+    }
+  }
+}
+
+.date-picker-container {
+  position: absolute;
+  left: 50%;
+  top: 18rem;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+.days-container {
+  margin: 0;
+  padding: 0;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  list-style-type: none;
+  border-left: 1px solid $color-grey-light;
+  border-right: 1px solid $color-grey-light;
+  color: $color-grey-m-dark;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  @for $i from 0 through 6 {
+    &-content-#{$i} {
+      align-self: center;
+      justify-self: center;
+      font-size: 1rem;
+
+      @media only screen and (max-width: $large) {
+        font-size: 0.95rem;
+      }
+
+      @media only screen and (max-width: $small) {
+        font-size: 0.85rem;
+      }
+
+      @media only screen and (max-width: $mobile) {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+.dates-container {
+  grid-row: 3 / 4;
+  grid-column: 1 / 8;
+  border-top: 1px solid $color-grey-light;
+  border-left: 1px solid $color-grey-light;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(10rem, 1fr);
+
+  @media only screen and (max-width: $large) {
+    grid-auto-rows: minmax(8rem, 1fr);
+  }
+
+  @media only screen and (max-width: $small) {
+    grid-auto-rows: minmax(5rem, 1fr);
+  }
+
+  &-content {
+    color: $color-grey-m-dark;
+    border-right: 1px solid $color-grey-light;
+    border-bottom: 1px solid $color-grey-light;
+    font-size: 1.5rem;
+    position: relative;
+    cursor: default;
+
+    @media only screen and (max-width: $large) {
+      font-size: 1.25rem;
+    }
+
+    &-date {
+      position: absolute;
+      top: 2%;
+      right: 5%;
+      min-height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+
+      @media only screen and (max-width: $large) {
+        min-height: 2rem;
+        width: 2rem;
+      }
+
+      &.active {
+        background-color: $color-grey-light;
+      }
+    }
+
+    &-event {
+      margin-top: 4rem;
+
+      @media only screen and (max-width: $large) {
+        margin-top: 3rem;
+      }
+
+      &-content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: $color-grey-dark;
+        background-color: $color-grey-m-light;
+        margin: 0.5rem;
+        font-size: 0.85rem;
+        text-align: left;
+        height: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.2rem;
+      }
+    }
+
+    &-addEvent-menu {
+      position: absolute;
+      border: none;
+      outline-style: none;
+      height: 2rem;
+      width: 2rem;
+      top: 5%;
+      left: 5%;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $color-primary;
+      font-size: 1.25rem;
+      color: $white;
+      transition: all 0.2s;
+
+      @media only screen and (max-width: $large) {
+        font-size: 1rem;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      @media only screen and (max-width: $small) {
+        top: 8%;
+        left: 8%;
+        font-size: 0.85rem;
+        height: 1.25rem;
+        width: 1.25rem;
+      }
+
+      &:hover {
+        background-color: $color-primary-hover;
+        cursor: pointer;
+      }
+    }
+
+    &-active {
+      position: absolute;
+      top: 1%;
+      right: 1.5%;
+      min-height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      background-color: $color-grey-light;
+
+      @media only screen and (max-width: $large) {
+        top: 2%;
+        right: 3%;
+        min-height: 2rem;
+        width: 2rem;
+      }
+    }
+
+    &.currMonth {
+      color: $color-grey-dark;
+    }
+  }
+}
